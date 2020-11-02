@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="dk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>500 - Internal error</title>
+</head>
+<body>
+<p class="error">
+    Noget gik glat.<br>
+    <a href="{{ url_for('do_index')}}">Tilbage til login.</a>
+</p>
+</body>
+</html>

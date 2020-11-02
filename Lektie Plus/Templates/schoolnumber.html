@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Skole ID</title>
+</head>
+
+<body class="blueback">
+<div class="white-text" align="center">
+    <h1>Step 1:</h1>
+    <br>
+    <h2>Gå til adressebaren og skriv wwww.lectio.dk</h2>
+    <img src="{{ url_for( 'static', filename='Lectio.png')}}" style="width:50%;height:50%">
+    <br><br>
+    <h1>Step 2:</h1>
+    <br>
+    <h2>Find din skole på listen</h2>
+    <img src="{{ url_for( 'static', filename='Vælg din skole.png')}}" style="width:50%;height:50%">
+    <br><br>
+    <h1>Step 3</h1>
+    <h2>Find din skoles id i adressebaren (I dette tilfælde er skolens ID 161)</h2>
+    <img src="{{ url_for( 'static', filename='Marker.png')}}" style="width:50%;height:50%">
+</div>
+</body>
+</html>

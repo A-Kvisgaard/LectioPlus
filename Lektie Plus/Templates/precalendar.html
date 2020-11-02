@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lektier</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<script src="{{ url_for('static', filename='launch.js') }}"></script>
+<body onload="start_date()">
+
+<div class="month">
+  <ul class="overview">
+    <li class="prev"><button class="nextbutton" onclick="prev()">❮</button></li>
+    <li class="next"><button class="nextbutton" onclick="next()">❯</button></li>
+    <li id="month" style="text-align:center">
+      <br>
+      <span id="year" style="font-size:18px"></span>
+    </li>
+  </ul>
+</div>
+
+<ul id="weekdays" class="weekdays">
+    <li id="day1"></li>
+    <li id="day2"></li>
+    <li id="day3"></li>
+    <li id="day4"></li>
+    <li id="day5"></li>
+    <li id="day6"></li>
+    <li id="day7"></li>
+</ul>
+
+<ul id="days" class="days">
+  <li id="1" onclick="valgt_dag(1)">1</li>
+  <li id="2" onclick="valgt_dag(2)">2</li>
+  <li id="3" onclick="valgt_dag(3)">3</li>
+  <li id="4" onclick="valgt_dag(4)">4</li>
+  <li id="5" onclick="valgt_dag(5)">5</li>
+  <li id="6" onclick="valgt_dag(6)">6</li>
+  <li id="7" onclick="valgt_dag(7)">7</li>
+  <li id="8" onclick="valgt_dag(8)">8</li>
+  <li id="9" onclick="valgt_dag(9)">9</li>
+  <li id="10" onclick="valgt_dag(10)">10</li>
+  <li id="11" onclick="valgt_dag(11)">11</li>
+  <li id="12" onclick="valgt_dag(12)">12</li>
+  <li id="13" onclick="valgt_dag(13)">13</li>
+  <li id="14" onclick="valgt_dag(14)">14</li>
+  <li id="15" onclick="valgt_dag(15)">15</li>
+  <li id="16" onclick="valgt_dag(16)">16</li>
+  <li id="17" onclick="valgt_dag(17)">17</li>
+  <li id="18" onclick="valgt_dag(18)"><span class="hw">18</span></li>
+  <li id="19" onclick="valgt_dag(19)">19</li>
+  <li id="20" onclick="valgt_dag(20)">20</li>
+  <li id="21" onclick="valgt_dag(21)">21</li>
+  <li id="22" onclick="valgt_dag(22)">22</li>
+  <li id="23" onclick="valgt_dag(23)">23</li>
+  <li id="24" onclick="valgt_dag(24)">24</li>
+  <li id="25" onclick="valgt_dag(25)">25</li>
+  <li id="26" onclick="valgt_dag(26)">26</li>
+  <li id="27" onclick="valgt_dag(27)">27</li>
+  <li id="28" onclick="valgt_dag(28)">28</li>
+  <li id="29" onclick="valgt_dag(29)">29</li>
+  <li id="30" onclick="valgt_dag(30)">30</li>
+  <li id="31" onclick="valgt_dag(31)">31</li>
+</ul>
+</body>
+
+<table>
+    <tr>
+        <td id="lektie1" class="lektier">{{lektie1}}</td>
+        <td id="lektie2" class="lektier">{{lektie2}}</td>
+        <td id="opgave" class="lektier">{{opgave}}</td>
+    </tr>
+    <tr>
+        <td id="fag1" class="lektier"></td>
+        <td id="fag2" class="lektier"></td>
+        <td id="fagO" class="lektier">{{fagO}}</td>
+    </tr>
+    <tr>
+        <td id="date1" class="lektier"></td>
+        <td id="date2" class="lektier"></td>
+        <td id="dateO" class="lektier">{{dateO}}</td>
+    </tr>
+    <tr>
+        <td id="modul1" class="lektier"></td>
+        <td id="modul" class="lektier"></td>
+        <td id="elevtid" class="lektier">{{elevtid}}</td>
+    </tr>
+    <tr>
+        <td id="note1" class="lektier"></td>
+        <td id="note2" class="lektier"></td>
+        <td id="titel" class="lektier">{{titel}}</td>
+    </tr>
+    <tr>
+        <td id="beskrivelse1" class="lektier"></td>
+        <td id="beskrivelse2" class="lektier"></td>
+        <td id="beskrivelseO" class="lektier">{{beskrivelseO}}</td>
+    </tr>
+</table>
+
+</html>

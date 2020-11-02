@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lektie+</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheet.css') }}">
+</head>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<body onload="number_of_days(), start_day(), show_month_and_year(), month()" onkeydown="key_event()">
+
+<button class="button" onclick="today()">I dag</button>
+
+<div class="month">
+  <ul class="overview">
+    <li class="prev"><button class="nextbutton" onclick="prev()">❮</button></li>
+    <li class="next"><button class="nextbutton" onclick="next()">❯</button></li>
+    <li style="text-align: center; font-size: 25px; letter-spacing: 3px;">Lektie+</li>
+    <li id="month" style="text-align:center; text-transform: uppercase">
+      <br>
+      <span id="year" style="font-size:18px"></span>
+    </li>
+  </ul>
+</div>
+
+<ul id="weekdays" class="weekdays">
+    <li id="day1"></li>
+    <li id="day2"></li>
+    <li id="day3"></li>
+    <li id="day4"></li>
+    <li id="day5"></li>
+    <li id="day6"></li>
+    <li id="day7"></li>
+</ul>
+
+<ul id="days" class="days">
+  <li id="1" onclick="shown_day(1)"><span {% if '1' in has_homework %} class="hw2" {% endif %}>1</span></li> <!-- Span bliver her bestemt af flask.  -->
+  <li id="2" onclick="shown_day(2)"><span {% if '2' in has_homework %} class="hw2" {% endif %}>2</span></li><!--  Den tjekker om dagen findes i -->
+  <li id="3" onclick="shown_day(3)"><span {% if '3' in has_homework %} class="hw2" {% endif %}>3</span></li><!-- has_homework dictionary'en og -->
+  <li id="4" onclick="shown_day(4)"><span {% if '4' in has_homework %} class="hw2" {% endif %}>4</span></li><!-- sætter class'en til 'hw', hvis den gør.-->
+  <li id="5" onclick="shown_day(5)"><span {% if '5' in has_homework %} class="hw2" {% endif %}>5</span></li><!-- Hvis dagen ikke findes, sætter den-->
+  <li id="6" onclick="shown_day(6)"><span {% if '6' in has_homework %} class="hw2" {% endif %}>6</span></li><!-- class'en til '' (ingenting)-->
+  <li id="7" onclick="shown_day(7)"><span {% if '7' in has_homework %} class="hw2" {% endif %}>7</span></li>
+  <li id="8" onclick="shown_day(8)"><span {% if '8' in has_homework %} class="hw2" {% endif %}>8</span></li>
+  <li id="9" onclick="shown_day(9)"><span {% if '9' in has_homework %} class="hw2" {% endif %}>9</span></li>
+  <li id="10" onclick="shown_day(10)"><span {% if '10' in has_homework %} class="hw" {% endif %}>10</span></li>
+  <li id="11" onclick="shown_day(11)"><span {% if '11' in has_homework %} class="hw" {% endif %}>11</span></li>
+  <li id="12" onclick="shown_day(12)"><span {% if '12' in has_homework %} class="hw" {% endif %}>12</span></li>
+  <li id="13" onclick="shown_day(13)"><span {% if '13' in has_homework %} class="hw" {% endif %}>13</span></li>
+  <li id="14" onclick="shown_day(14)"><span {% if '14' in has_homework %} class="hw" {% endif %}>14</span></li>
+  <li id="15" onclick="shown_day(15)"><span {% if '15' in has_homework %} class="hw" {% endif %}>15</span></li>
+  <li id="16" onclick="shown_day(16)"><span {% if '16' in has_homework %} class="hw" {% endif %}>16</span></li>
+  <li id="17" onclick="shown_day(17)"><span {% if '17' in has_homework %} class="hw" {% endif %}>17</span></li>
+  <li id="18" onclick="shown_day(18)"><span {% if '18' in has_homework %} class="hw" {% endif %}>18</span></li>
+  <li id="19" onclick="shown_day(19)"><span {% if '19' in has_homework %} class="hw" {% endif %}>19</span></li>
+  <li id="20" onclick="shown_day(20)"><span {% if '20' in has_homework %} class="hw" {% endif %}>20</span></li>
+  <li id="21" onclick="shown_day(21)"><span {% if '21' in has_homework %} class="hw" {% endif %}>21</span></li>
+  <li id="22" onclick="shown_day(22)"><span {% if '22' in has_homework %} class="hw" {% endif %}>22</span></li>
+  <li id="23" onclick="shown_day(23)"><span {% if '23' in has_homework %} class="hw" {% endif %}>23</span></li>
+  <li id="24" onclick="shown_day(24)"><span {% if '24' in has_homework %} class="hw" {% endif %}>24</span></li>
+  <li id="25" onclick="shown_day(25)"><span {% if '25' in has_homework %} class="hw" {% endif %}>25</span></li>
+  <li id="26" onclick="shown_day(26)"><span {% if '26' in has_homework %} class="hw" {% endif %}>26</span></li>
+  <li id="27" onclick="shown_day(27)"><span {% if '27' in has_homework %} class="hw" {% endif %}>27</span></li>
+  <li id="28" onclick="shown_day(28)"><span {% if '28' in has_homework %} class="hw" {% endif %}>28</span></li>
+  <li id="29" onclick="shown_day(29)"><span {% if '29' in has_homework %} class="hw" {% endif %}>29</span></li>
+  <li id="30" onclick="shown_day(30)"><span {% if '30' in has_homework %} class="hw" {% endif %}>30</span></li>
+  <li id="31" onclick="shown_day(31)"><span {% if '31' in has_homework %} class="hw" {% endif %}>31</span></li>
+</ul>
+</body>
+
+{% if assignments|length %} <!--Hvis der er et objekt i listen, "assignments" ( hvis der er en opgave for )-->
+
+<table class="opgaver">
+    <caption>Opgaver</caption>
+    {% for assignment in assignments %} <!--Går igennem assignments og sætter hvert element ind i tabellen-->
+        <tr>
+            <td valign="top" width="25%">Titel:</td>
+            <td id="titel" >{{assignment.titel}}</td>
+        </tr>
+    <tr>
+        <td valign="top">Fag:</td>
+        <td id="fagO" >{{assignment.fagO}}</td>
+    </tr>
+    <tr>
+        <td valign="top">Dato:</td>
+        <td id="dateO" >{{assignment.dateO}}</td>
+    </tr>
+    <tr>
+        <td valign="top">Elevtid:</td>
+        <td id="elevtid" >{{assignment.elevtid}}</td>
+    </tr>
+        <tr>
+            <td valign="top">Opgavebeskrivelse:</td>
+            <td id="beskrivelseO" >{{ assignment.beskrivelseO}}<br><br></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% else %} <!--Hvis der ikke er noget i listen, vil denne tabel blive vist-->
+<table class="ingen_opgaver">
+    <caption>Du har ingen opgaver for i dag.</caption>
+</table>
+{% endif %}
+
+{% if homework_table|length %} <!--Hvis der er et objekt i listen, "homework_table" ( hvis der er lektier for )-->
+
+<table class="lektier">
+    <caption>Lektier</caption>
+    {% for homework in homework_table %}
+        <tr>
+            <td valign="top" width="16%">Fag:</td>
+            <td id="fag" >{{homework.fag}}</td>
+        </tr>
+        <tr>
+            <td valign="top">Dato:</td>
+            <td id="date" >{{homework.date}}</td>
+        </tr>
+        <tr>
+            <td valign="top">Modul:</td>
+            <td id="modul" >{{homework.modul}}</td>
+        </tr>
+        <tr>
+            <td valign="top">Lektienote:</td>
+            <td id="note" >{{homework.note}}</td>
+        </tr>
+        <tr>
+            <td valign="top">Beskrivelse:</td>
+            <td id="beskrivelse" >{{homework.beskrivelse}}<br><br></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<table class="ingen_lektier">
+    <caption>Du har ingen lektier for i dag.</caption>
+</table>
+{% endif %}
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="dk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Login</title>
+</head>
+<body class="blueback">
+<div align="center">
+    <form class ="form" action="/submit" method="post">
+            <span class="title">Skollenummer:</span><br>
+                <input class="first_input" type="text" name="school" placeholder="f.eks 680">
+                    <br><a href="/schoolnumber" target="_blank">Hvad er mit skollenumer?</a> <br>
+            <span class="title">Brugernavn:</span><br>
+                <input type="text" name="usn" pattern="(^[a-z]{4}[0-9]{3}[a-z]{1})|(^[a-z]{4}[0-9]{4})" minlength="8" maxlength="8"
+                       title="Brugernavnet skal overholde format aaaa111a eller aaaa1111" placeholder="Unilogin brugernavn"><br>
+            <span class="title">Kodeord:</span><br>
+                <input id='password' type="password" name="psw" minlength="8" placeholder="Unilogin kodeord"><br>
+            <input type="submit" value="Login" >
+    </form>
+</div>
+{% if error %}
+<p class="error">
+    {{ error }}
+</p>
+{% endif %}
+<script src="{{ url_for('static', filename='show_password.js') }}"></script>
+<script>
+    function re_school_number(){
+         window.location.replace("/schoolnumber");
+   }
+</script>
+</body>
+</html>
+
